@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -105,32 +106,6 @@
             color:rgba(0,180,216,0.6); text-transform:uppercase;
             margin-bottom:12px; align-self:flex-start;
         }
-        .links { width:100%; display:flex; flex-direction:column; gap:12px; margin-bottom:26px; }
-        .lbtn {
-            display:flex; align-items:center; gap:14px; width:100%;
-            padding:15px 20px; border-radius:18px;
-            text-decoration:none; cursor:pointer;
-            transition:transform .22s ease, box-shadow .22s ease;
-            border:1px solid transparent; position:relative; overflow:hidden;
-        }
-        .lbtn::after {
-            content:'›'; position:absolute; right:18px;
-            font-size:1.4rem; opacity:.4;
-            transition:right .2s ease, opacity .2s ease;
-        }
-        .lbtn:hover::after { right:14px; opacity:.8; }
-        .lbtn:hover { transform:translateY(-2px); }
-        .lbtn:active { transform:translateY(0); }
-        .lbtn.gold {
-            background:linear-gradient(110deg,var(--gold),var(--gold-d));
-            box-shadow:0 6px 20px rgba(255,209,102,0.25);
-        }
-        .lbtn.gold:hover { box-shadow:0 10px 28px rgba(255,209,102,0.35); }
-        .lbtn.gold .lbtn-title, .lbtn.gold .lbtn-sub, .lbtn.gold::after { color:#021e36; }
-        .lbtn-icon { font-size:1.6rem; flex-shrink:0; width:34px; text-align:center; }
-        .lbtn-text { flex:1; }
-        .lbtn-title { font-size:.98rem; font-weight:800; color:var(--white); line-height:1.2; }
-        .lbtn-sub   { font-size:.78rem; font-weight:600; color:rgba(240,250,255,0.6); margin-top:1px; }
         .products { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:28px; }
         .pcard {
             background:var(--glass); border:1px solid var(--glass-b);
@@ -164,19 +139,9 @@
         <div class="handle">@fisgadonaisca</div>
         <p class="bio">Contando mentiras, perdendo iscas e (às vezes) pegando peixes! 🐟<br>Clica aí pra equipar sua tralha!</p>
     </div>
-    <div class="sec-label fi d2">▸ Produtos</div>
-    <div class="links fi d2">
-        <a class="lbtn gold" href="SEU_LINK_ML_AQUI" target="_blank">
-            <div class="lbtn-icon">🛒</div>
-            <div class="lbtn-text">
-                <div class="lbtn-title">Ver todos os produtos</div>
-                <div class="lbtn-sub">Equipamentos que uso nos vídeos</div>
-            </div>
-        </a>
-    </div>
-    <div class="divider fi d3"></div>
-    <div class="sec-label fi d3">▸ Tralha em destaque</div>
-    <div class="products fi d4">
+    <div class="divider fi d2"></div>
+    <div class="sec-label fi d2">▸ Tralha em destaque</div>
+    <div class="products fi d3">
         <a class="pcard" href="https://meli.la/1J9cvQC" target="_blank">
             <div class="pcard-icon">🪱</div>
             <div class="pcard-name">Iscas Matadoras</div>
@@ -198,7 +163,7 @@
             <div class="pcard-tag">melhor preço</div>
         </a>
     </div>
-    <div class="footer fi d5">feito com 🎣 por fisgadonaisca</div>
+    <div class="footer fi d4">feito com 🎣 por fisgadonaisca</div>
 </div>
 <script>
 (function(){
