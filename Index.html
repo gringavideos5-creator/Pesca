@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FisgadoNaIsca 🎣</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #020d18;
+            --bg-mid:  #021e36;
+            --blue:    #0077b6;
+            --cyan:    #00b4d8;
+            --white:   #f0faff;
+            --gold:    #ffd166;
+            --gold-d:  #f4a261;
+            --glass:   rgba(255,255,255,0.06);
+            --glass-b: rgba(255,255,255,0.12);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--bg-deep);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            color: var(--white);
+        }
+        .bg-layer {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% 0%,  rgba(0,119,182,0.35) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 40% at 10% 60%, rgba(0,180,216,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 50% at 90% 80%, rgba(0,77,120,0.2)   0%, transparent 60%),
+                linear-gradient(180deg, #020d18 0%, #021e36 60%, #020d18 100%);
+        }
+        #bubbles { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+        .b {
+            position: absolute; bottom: -60px; border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, rgba(0,180,216,0.22), rgba(0,119,182,0.04));
+            border: 1px solid rgba(0,180,216,0.16);
+            animation: rise linear infinite;
+        }
+        @keyframes rise {
+            0%   { opacity:0; transform:translateY(0) translateX(0); }
+            8%   { opacity:1; }
+            92%  { opacity:.5; }
+            100% { opacity:0; transform:translateY(-115vh) translateX(18px); }
+        }
+        .container {
+            position: relative; z-index: 10;
+            max-width: 430px; margin: 0 auto;
+            padding: 48px 22px 64px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .fi {
+            opacity: 0; transform: translateY(26px);
+            animation: fiu .7s cubic-bezier(.25,.8,.25,1) forwards;
+            width: 100%;
+        }
+        .d1{animation-delay:.15s} .d2{animation-delay:.30s} .d3{animation-delay:.45s}
+        .d4{animation-delay:.60s} .d5{animation-delay:.75s}
+        @keyframes fiu { to { opacity:1; transform:translateY(0); } }
+        .profile { text-align: center; margin-bottom: 28px; }
+        .avatar-wrap { position: relative; width: 112px; height: 112px; margin: 0 auto 14px; }
+        .avatar {
+            width:100%; height:100%; border-radius:50%;
+            background: linear-gradient(145deg, #0077b6, #023e8a);
+            display:flex; align-items:center; justify-content:center; font-size:56px;
+            border: 3px solid rgba(0,180,216,0.4);
+            box-shadow: 0 0 0 6px rgba(0,180,216,0.1), 0 12px 32px rgba(0,0,0,0.5);
+            animation: bob 4s ease-in-out infinite;
+        }
+        @keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+        .badge {
+            position:absolute; bottom:2px; right:2px;
+            width:34px; height:34px; background:var(--bg-deep);
+            border-radius:50%; border:2px solid rgba(255,255,255,0.2);
+            display:flex; align-items:center; justify-content:center; font-size:18px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.4);
+            animation: bnc 2.5s ease-in-out infinite;
+        }
+        @keyframes bnc {
+            0%,100%{transform:translateY(0) rotate(0deg)}
+            40%{transform:translateY(-8px) rotate(-10deg)}
+            60%{transform:translateY(-4px) rotate(5deg)}
+        }
+        .name {
+            font-family:'Bangers',cursive; font-size:2.4rem; letter-spacing:3px;
+            color:var(--gold);
+            text-shadow:0 0 24px rgba(255,209,102,0.4), 2px 2px 0 rgba(0,0,0,0.5);
+            line-height:1; margin-bottom:5px;
+        }
+        .handle { font-size:.95rem; font-weight:700; color:var(--cyan); letter-spacing:1px; margin-bottom:12px; }
+        .bio { font-size:.92rem; line-height:1.55; color:rgba(240,250,255,0.85); font-style:italic; padding:0 8px; }
+        .divider {
+            width:100%; height:1px;
+            background:linear-gradient(90deg,transparent,rgba(0,180,216,0.3),transparent);
+            margin:20px 0;
+        }
+        .sec-label {
+            font-size:.72rem; font-weight:800; letter-spacing:3px;
+            color:rgba(0,180,216,0.6); text-transform:uppercase;
+            margin-bottom:12px; align-self:flex-start;
+        }
+        .links { width:100%; display:flex; flex-direction:column; gap:12px; margin-bottom:26px; }
+        .lbtn {
+            display:flex; align-items:center; gap:14px; width:100%;
+            padding:15px 20px; border-radius:18px;
+            text-decoration:none; cursor:pointer;
+            transition:transform .22s ease, box-shadow .22s ease;
+            border:1px solid transparent; position:relative; overflow:hidden;
+        }
+        .lbtn::after {
+            content:'›'; position:absolute; right:18px;
+            font-size:1.4rem; opacity:.4;
+            transition:right .2s ease, opacity .2s ease;
+        }
+        .lbtn:hover::after { right:14px; opacity:.8; }
+        .lbtn:hover { transform:translateY(-2px); }
+        .lbtn:active { transform:translateY(0); }
+        .lbtn.gold {
+            background:linear-gradient(110deg,var(--gold),var(--gold-d));
+            box-shadow:0 6px 20px rgba(255,209,102,0.25);
+        }
+        .lbtn.gold:hover { box-shadow:0 10px 28px rgba(255,209,102,0.35); }
+        .lbtn.gold .lbtn-title, .lbtn.gold .lbtn-sub, .lbtn.gold::after { color:#021e36; }
+        .lbtn-icon { font-size:1.6rem; flex-shrink:0; width:34px; text-align:center; }
+        .lbtn-text { flex:1; }
+        .lbtn-title { font-size:.98rem; font-weight:800; color:var(--white); line-height:1.2; }
+        .lbtn-sub   { font-size:.78rem; font-weight:600; color:rgba(240,250,255,0.6); margin-top:1px; }
+        .products { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:28px; }
+        .pcard {
+            background:var(--glass); border:1px solid var(--glass-b);
+            border-radius:16px; padding:20px 12px 16px;
+            text-align:center; text-decoration:none; color:var(--white);
+            display:flex; flex-direction:column; align-items:center; gap:8px;
+            transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+            backdrop-filter:blur(8px);
+        }
+        .pcard:hover { transform:translateY(-4px); border-color:rgba(0,180,216,0.4); box-shadow:0 10px 24px rgba(0,0,0,0.35); }
+        .pcard-icon { font-size:2.4rem; }
+        .pcard-name { font-size:.88rem; font-weight:800; line-height:1.3; }
+        .pcard-tag {
+            font-size:.7rem; font-weight:700; color:var(--cyan);
+            background:rgba(0,180,216,0.1); border:1px solid rgba(0,180,216,0.2);
+            padding:3px 10px; border-radius:20px;
+        }
+        .footer { font-size:.72rem; font-weight:700; letter-spacing:1px; color:rgba(240,250,255,0.2); text-align:center; margin-top:10px; }
+    </style>
+</head>
+<body>
+<div class="bg-layer"></div>
+<div id="bubbles"></div>
+<div class="container">
+    <div class="profile fi d1">
+        <div class="avatar-wrap">
+            <div class="avatar">🎣</div>
+            <div class="badge">🤣</div>
+        </div>
+        <div class="name">FisgadoNaIsca</div>
+        <div class="handle">@fisgadonaisca</div>
+        <p class="bio">Contando mentiras, perdendo iscas e (às vezes) pegando peixes! 🐟<br>Clica aí pra equipar sua tralha!</p>
+    </div>
+    <div class="sec-label fi d2">▸ Produtos</div>
+    <div class="links fi d2">
+        <a class="lbtn gold" href="SEU_LINK_ML_AQUI" target="_blank">
+            <div class="lbtn-icon">🛒</div>
+            <div class="lbtn-text">
+                <div class="lbtn-title">Ver todos os produtos</div>
+                <div class="lbtn-sub">Equipamentos que uso nos vídeos</div>
+            </div>
+        </a>
+    </div>
+    <div class="divider fi d3"></div>
+    <div class="sec-label fi d3">▸ Tralha em destaque</div>
+    <div class="products fi d4">
+        <a class="pcard" href="https://meli.la/1J9cvQC" target="_blank">
+            <div class="pcard-icon">🪱</div>
+            <div class="pcard-name">Iscas Matadoras</div>
+            <div class="pcard-tag">+ vendido</div>
+        </a>
+        <a class="pcard" href="https://meli.la/2L9i1Ar" target="_blank">
+            <div class="pcard-icon">🎣</div>
+            <div class="pcard-name">Vara & Molinete</div>
+            <div class="pcard-tag">custo-benefício</div>
+        </a>
+        <a class="pcard" href="https://meli.la/2eRxCDk" target="_blank">
+            <div class="pcard-icon">🧵</div>
+            <div class="pcard-name">Multifilamento</div>
+            <div class="pcard-tag">essencial</div>
+        </a>
+        <a class="pcard" href="https://meli.la/1dpNXhm" target="_blank">
+            <div class="pcard-icon">🎒</div>
+            <div class="pcard-name">Kit Pesca Completo</div>
+            <div class="pcard-tag">melhor preço</div>
+        </a>
+    </div>
+    <div class="footer fi d5">feito com 🎣 por fisgadonaisca</div>
+</div>
+<script>
+(function(){
+    const c = document.getElementById('bubbles');
+    for(let i=0;i<22;i++){
+        const b=document.createElement('div');
+        b.className='b';
+        const s=Math.random()*28+8;
+        b.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}vw;animation-duration:${Math.random()*7+6}s;animation-delay:${Math.random()*8}s;`;
+        c.appendChild(b);
+    }
+})();
+</script>
+</body>
+</html>
